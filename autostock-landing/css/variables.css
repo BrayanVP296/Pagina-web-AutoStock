@@ -1,0 +1,26 @@
+/* ============================================================
+   AUTOSTOCK — Variables globales
+   Paleta de colores, tipografía y tokens de diseño.
+   Modificar aquí afecta toda la interfaz.
+   ============================================================ */
+
+:root {
+  /* Colores principales */
+  --color-bg:         #FFFFFF;
+  --color-dark:       #111827;
+  --color-accent:     #2DD4BF;
+  --color-dark-alt:   #1F2937;
+  --color-deep:       #345253;
+  --color-gray-light: #F3F4F6;
+
+  /* Colores de estado */
+  --color-success:    #09B423;
+  --color-warning:    #B45309;
+  --color-error:      #B40909;
+  --color-info:       #3B82F6;
+  --color-black:      #000000;
+
+  /* Tipografía */
+  --font-heading: 'Inter', 'Roboto', sans-serif;
+  --font-body:    'DM Sans', 'Roboto', sans-serif;
+}

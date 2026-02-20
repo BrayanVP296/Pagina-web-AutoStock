@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoStock — Sistema Inteligente de Gestión de Inventarios</title>
+    <meta name="description"
+        content="AutoStock centraliza, automatiza y optimiza la gestión de inventarios para PYMEs. Menos errores, más control, mayor rentabilidad.">
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Estilos AutoStock -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Modal AutoStock — estilos embebidos para garantizar carga -->
+    <style>
+    /* ── OVERLAY ─────────────────────────────────────────────── */
+    .demo-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .demo-modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ── CONTENEDOR ──────────────────────────────────────────── */
+    .demo-modal {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 44px 40px 36px;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .demo-modal-overlay.open .demo-modal {
+      transform: translateY(0) scale(1);
+    }
+    .demo-modal::-webkit-scrollbar { width: 4px; }
+    .demo-modal::-webkit-scrollbar-thumb { background: #2DD4BF; border-radius: 4px; }
+
+    /* ── BOTÓN CERRAR ────────────────────────────────────────── */
+    .demo-modal-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none; border: none;
+      font-size: 20px; color: #9CA3AF;
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s ease;
+      padding: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .demo-modal-close:hover {
+      color: #111827;
+      transform: rotate(90deg);
+    }
+
+    /* ── TÍTULO Y SUBTÍTULO ──────────────────────────────────── */
+    .demo-modal-title {
+      font-family: 'Inter', 'Roboto', sans-serif;
+      font-size: 26px; font-weight: 800;
+      color: #111827;
+      text-align: center; margin-bottom: 8px;
+    }
+    .demo-modal-sub {
+      font-size: 14px; color: #6B7280;
+      text-align: center; margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    /* ── FORMULARIO ──────────────────────────────────────────── */
+    .demo-form { display: flex; flex-direction: column; }
+    .demo-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .demo-form-group {
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .demo-form-group input {
+      width: 100%;
+      border: none;
+      border-bottom: 1.5px solid #D1D5DB;
+      background: transparent;
+      padding: 10px 0;
+      font-size: 15px;
+      font-family: 'DM Sans', 'Roboto', sans-serif;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.25s ease;
+      border-radius: 0;
+    }
+    .demo-form-group input::placeholder { color: #9CA3AF; font-size: 14px; }
+    .demo-form-group input:focus { border-bottom-color: #2DD4BF; }
+    .demo-form-group::after {
+      content: '';
+      position: absolute;
+      bottom: 22px; left: 0;
+      width: 0; height: 2px;
+      background: #2DD4BF;
+      transition: width 0.3s ease;
+    }
+    .demo-form-group:focus-within::after { width: 100%; }
+
+    /* ── CHECKBOX ────────────────────────────────────────────── */
+    .demo-form-check {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: #6B7280;
+      margin-bottom: 24px; cursor: pointer; line-height: 1.5;
+    }
+    .demo-form-check input[type="checkbox"] {
+      width: 16px; height: 16px; min-width: 16px;
+      margin-top: 2px;
+      accent-color: #2DD4BF; cursor: pointer;
+    }
+    .demo-link {
+      color: #2DD4BF; font-weight: 600;
+      text-decoration: none;
+    }
+    .demo-link:hover { text-decoration: underline; }
+
+    /* ── BOTÓN SUBMIT ────────────────────────────────────────── */
+    .demo-form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #3B82F6 0%, #2DD4BF 100%);
+      color: #FFFFFF;
+      font-family: 'Inter', 'Roboto', sans-serif;
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 16px;
+      border-radius: 50px; border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .demo-form-submit:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(59,130,246,0.4);
+      filter: brightness(1.05);
+    }
+    .demo-form-submit:disabled {
+      opacity: 0.7; cursor: not-allowed;
+      transform: none; box-shadow: none;
+    }
+    .btn-spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: modalSpin 0.7s linear infinite;
+      display: none;
+    }
+    .demo-form-submit.loading .btn-spinner { display: block; }
+    @keyframes modalSpin { to { transform: rotate(360deg); } }
+
+    /* ── TÉRMINOS ────────────────────────────────────────────── */
+    .demo-form-terms {
+      text-align: center; font-size: 12px; color: #9CA3AF;
+    }
+
+    /* ── TOAST ───────────────────────────────────────────────── */
+    .demo-toast {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: #111827; color: #FFFFFF;
+      padding: 16px 20px;
+      border-radius: 14px;
+      border-left: 4px solid #2DD4BF;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      font-size: 14px; font-weight: 500;
+      z-index: 99999;
+      display: flex; align-items: center; gap: 10px;
+      max-width: 340px; line-height: 1.4;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .demo-toast.show { transform: translateY(0); opacity: 1; }
+    .demo-toast.error { border-left-color: #B40909; }
+    .toast-icon { font-size: 20px; flex-shrink: 0; color: #2DD4BF; }
+    .demo-toast.error .toast-icon { color: #B40909; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 540px) {
+      .demo-modal { padding: 36px 22px 28px; border-radius: 20px; }
+      .demo-modal-title { font-size: 22px; }
+      .demo-form-row { grid-template-columns: 1fr; gap: 0; }
+      .demo-toast { bottom: 16px; right: 16px; left: 16px; max-width: 100%; }
+    }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       SECTION 1 — NAVBAR
+       ============================================================ -->
+    <header class="navbar" id="navbar">
+        <div class="container">
+            <a href="#inicio" class="navbar-brand" aria-label="AutoStock inicio">
+                <img src="assets/img/logo.png" alt="AutoStock logo">
+                <span class="brand-text"><span class="auto">Auto</span><span class="stock">Stock</span></span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#inicio">Inicio</a>
+                <a href="#caracteristicas">Características</a>
+                <a href="#tecnologias">Tecnologías</a>
+                <a href="#equipo">Equipo</a>
+                <a href="#" class="btn-cta-nav" data-open-demo>Solicitar Demo</a>
+            </nav>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================================================
+         SECTION 2 — HERO
+         ============================================================ -->
+        <section class="hero" id="inicio">
+            <div class="container">
+                <div class="hero-grid">
+                    <!-- Left column -->
+                    <div class="hero-content">
+                        <div class="hero-badge">⚡ Sistema Inteligente de Inventarios</div>
+                        <h1 class="hero-title">
+                            <span class="line1">Automatiza tu inventario,</span>
+                            <span class="line2">escala tu negocio.</span>
+                        </h1>
+                        <p class="hero-desc">AutoStock es el sistema web que centraliza, automatiza y optimiza la
+                            gestión de inventarios para PYMEs. Menos errores, más control, mayor rentabilidad.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary" data-open-demo>Solicitar Demo <i
+                                    class="bi bi-arrow-right"></i></button>
+                        </div>
+
+                    </div>
+
+                    <!-- Right column — Dashboard mockup -->
+                    <div class="hero-mockup">
+                        <div class="dashboard-card">
+                            <div class="dash-sidebar">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <i class="bi bi-box-seam"></i>
+                                <i class="bi bi-arrow-down-up"></i>
+                                <i class="bi bi-people"></i>
+                                <i class="bi bi-gear"></i>
+                            </div>
+                            <div class="dash-main">
+                                <div class="dash-header">
+                                    <span class="dash-header-title">Dashboard AutoStock</span>
+                                    <span class="dash-header-badge">En vivo</span>
+                                </div>
+                                <div class="dash-kpis">
+                                    <div class="dash-kpi">
+                                        <div class="dash-kpi-label"><i class="bi bi-box-seam"></i> Productos</div>
+                                        <div class="dash-kpi-value">1,248</div>
+                                        <div class="dash-kpi-change up">↑ 12% este mes</div>
+                                    </div>
+                                    <div class="dash-kpi">
+                                        <div class="dash-kpi-label"><i class="bi bi-arrow-down-circle"></i> Entradas hoy
+                                        </div>
+                                        <div class="dash-kpi-value">37</div>
+                                        <div class="dash-kpi-change up">↑ 8% vs ayer</div>
+                                    </div>
+                                    <div class="dash-kpi">
+                                        <div class="dash-kpi-label"><i class="bi bi-exclamation-triangle"></i> Bajo
+                                            Stock</div>
+                                        <div class="dash-kpi-value">5</div>
+                                        <div class="dash-kpi-change down">⚠ Requiere atención</div>
+                                    </div>
+                                    <div class="dash-kpi">
+                                        <div class="dash-kpi-label"><i class="bi bi-clipboard-check"></i> Novedades
+                                        </div>
+                                        <div class="dash-kpi-value">12</div>
+                                        <div class="dash-kpi-change up">✓ Al día</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         SECTION 3 — CARACTERÍSTICAS
+         ============================================================ -->
+        <section class="features" id="caracteristicas">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Todo lo que necesitas, en un solo sistema</h2>
+                    <p>AutoStock organiza tu negocio por módulos inteligentes e interconectados</p>
+                </div>
+                <!-- Carousel -->
+                <div class="features-carousel reveal">
+                    <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Anterior">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <div class="carousel-viewport">
+                        <div class="carousel-track" id="carouselTrack">
+                            <!-- Cards are injected by js/carousel.js -->
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Siguiente">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <!-- Detail panel (populated by JS on card click) -->
+                <div class="feature-detail" id="featureDetail" role="region" aria-label="Detalle de característica">
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         SECTION 4 — TECNOLOGÍAS
+         ============================================================ -->
+        <section class="tech" id="tecnologias">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Construido con tecnología de punta</h2>
+                    <p>Un stack moderno, escalable y seguro para gestionar tu inventario</p>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-pill reveal">
+                        <div class="emoji">⚛️</div>
+                        <div class="tech-info">
+                            <div class="tech-role">Frontend</div>
+                            <h3>React.js</h3>
+                            <p>Interfaz moderna, reactiva y fluida para una experiencia de usuario óptima.</p>
+                        </div>
+                    </div>
+                    <div class="tech-pill reveal">
+                        <div class="emoji">🐍</div>
+                        <div class="tech-info">
+                            <div class="tech-role">Backend</div>
+                            <h3>FastAPI (Python)</h3>
+                            <p>API REST rápida y escalable que potencia toda la lógica del sistema.</p>
+                        </div>
+                    </div>
+                    <div class="tech-pill reveal">
+                        <div class="emoji">🗄️</div>
+                        <div class="tech-info">
+                            <div class="tech-role">Base de datos</div>
+                            <h3>MySQL</h3>
+                            <p>Almacenamiento relacional robusto, confiable y optimizado para consultas complejas.</p>
+                        </div>
+                    </div>
+                    <div class="tech-pill reveal">
+                        <div class="emoji">🔗</div>
+                        <div class="tech-info">
+                            <div class="tech-role">Integración externa</div>
+                            <h3>Bsale API</h3>
+                            <p>Sincronización automática con el sistema de ventas para datos siempre actualizados.</p>
+                        </div>
+                    </div>
+                    <div class="tech-pill reveal">
+                        <div class="emoji">☁️</div>
+                        <div class="tech-info">
+                            <div class="tech-role">Infraestructura</div>
+                            <h3>Cloud / Web</h3>
+                            <p>Accesible desde cualquier navegador y dispositivo, sin instalaciones locales.</p>
+                        </div>
+                    </div>
+                    <div class="tech-pill reveal">
+                        <div class="emoji">🔐</div>
+                        <div class="tech-info">
+                            <div class="tech-role">Seguridad</div>
+                            <h3>JWT + Roles</h3>
+                            <p>Autenticación segura con tokens JWT y control de acceso diferenciado por rol.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         SECTION 5 — EQUIPO
+         ============================================================ -->
+        <section class="team" id="equipo">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>El equipo detrás de AutoStock</h2>
+                    <p>Desarrollado por aprendices del SENA — Análisis y Desarrollo de Software</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-card reveal">
+                        <div class="team-avatar">PD</div>
+                        <h3>Pedro Daniel Pirachican Vargas</h3>
+                        <div class="team-role">🛠️ Líder Técnico / Backend &amp; Arquitectura</div>
+                        <p class="team-desc">Responsable de la arquitectura del sistema, backend con FastAPI, base de
+                            datos, seguridad e integraciones externas.</p>
+                        <div class="team-tags">
+                            <span>FastAPI</span>
+                            <span>Python</span>
+                            <span>MySQL</span>
+                            <span>DevOps</span>
+                            <span>Arquitectura</span>
+                        </div>
+                        <div class="team-footer">
+                            <div>🎓 SENA — Análisis y Desarrollo de Software (ADSO)</div>
+                            <div>📍 Tunja, Colombia</div>
+                        </div>
+                    </div>
+                    <div class="team-card reveal">
+                        <div class="team-avatar">BR</div>
+                        <h3>Brayan Ricardo Vera Parra</h3>
+                        <div class="team-role">🎨 Frontend &amp; Experiencia de Usuario</div>
+                        <p class="team-desc">Encargado del desarrollo de la interfaz, UI/UX, consumo de APIs y
+                            optimización de la experiencia de usuario.</p>
+                        <div class="team-tags">
+                            <span>React.js</span>
+                            <span>UI/UX</span>
+                            <span>CSS</span>
+                            <span>APIs</span>
+                            <span>Testing</span>
+                        </div>
+                        <div class="team-footer">
+                            <div>🎓 SENA — Análisis y Desarrollo de Software (ADSO)</div>
+                            <div>📍 Tunja, Colombia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+         SECTION 6 — CTA FINAL
+         ============================================================ -->
+        <section class="cta-section" id="cta">
+            <div class="container">
+                <h2 class="reveal">Agenda Tu Demo Virtual Gratuita</h2>
+                <div class="cta-benefits reveal">
+                    <p class="cta-benefit"><i class="bi bi-check-circle-fill"></i> Solicite hoy su demo virtual gratuita
+                    </p>
+                    <p class="cta-benefit"><i class="bi bi-check-circle-fill"></i> Acceda a un 10% de descuento en su
+                        primera licencia</p>
+                </div>
+                <div class="cta-buttons reveal">
+                    <button class="btn-cta-big" data-open-demo><i class="bi bi-rocket-takeoff"></i> Solicitar
+                        Demo</button>
+                    <a href="https://wa.me/573001234567?text=Hola%2C%20quiero%20agendar%20una%20demo%20de%20AutoStock"
+                        target="_blank" rel="noopener" class="btn-whatsapp"><i class="bi bi-whatsapp"></i> Contáctanos
+                        por WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+       SECTION 7 — FOOTER
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <span class="auto">Auto</span><span class="stock">Stock</span>
+            </div>
+            <p class="footer-copy">© 2026 AutoStock — SENA, Análisis y Desarrollo de Software</p>
+            <nav class="footer-links">
+                <a href="#caracteristicas">Características</a>
+                <a href="#tecnologias">Tecnologías</a>
+                <a href="#equipo">Equipo</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         MODAL — Formulario Solicitar Demo
+         ============================================================ -->
+    <div class="demo-modal-overlay" id="demoModal">
+        <div class="demo-modal">
+            <button class="demo-modal-close" id="demoModalClose" aria-label="Cerrar formulario">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <h2 class="demo-modal-title">Agenda tu demo gratuita</h2>
+            <p class="demo-modal-sub">Déjanos tus datos y un asesor se pondrá en contacto contigo.</p>
+            <form class="demo-form" id="demoForm">
+                <div class="demo-form-row">
+                    <div class="demo-form-group">
+                        <input type="text" id="demoNombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="demo-form-group">
+                        <input type="text" id="demoApellidos" placeholder="Apellidos" required>
+                    </div>
+                </div>
+                <div class="demo-form-group">
+                    <input type="email" id="demoEmail" placeholder="Correo electrónico" required>
+                </div>
+                <div class="demo-form-row">
+                    <div class="demo-form-group">
+                        <input type="tel" id="demoTel" placeholder="Teléfono / WhatsApp">
+                    </div>
+                    <div class="demo-form-group">
+                        <input type="text" id="demoEmpresa" placeholder="Empresa">
+                    </div>
+                </div>
+                <div class="demo-form-group">
+                    <input type="text" id="demoCiudad" placeholder="Ciudad">
+                </div>
+                <label class="demo-form-check">
+                    <input type="checkbox" id="demoPrivacy" required>
+                    <span>Al completar el formulario acepto la <a href="#" class="demo-link">Política de Tratamiento de
+                            Datos.</a></span>
+                </label>
+                <button type="submit" class="demo-form-submit">SOLICITAR DEMO</button>
+                <p class="demo-form-terms"><a href="#" class="demo-link">*Aplican Términos y Condiciones.</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts AutoStock -->
+    <script src="js/navbar.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/carousel.js"></script>
+
+    <!-- Modal Demo — JS embebido para garantizar carga -->
+    <script>
+    /* ============================================================
+       AUTOSTOCK — Demo Modal
+       ============================================================ */
+    const EMAILJS_PUBLIC_KEY  = 'TU_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID  = 'TU_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID';
+
+    if (typeof emailjs !== 'undefined') emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    /* Selectores */
+    const demoModalOverlay = document.getElementById('demoModal');
+    const demoModalClose   = document.getElementById('demoModalClose');
+    const demoForm         = document.getElementById('demoForm');
+    const demoSubmitBtn    = demoForm.querySelector('.demo-form-submit');
+    const demoTriggers     = document.querySelectorAll('[data-open-demo]');
+
+    /* Abrir */
+    function openDemoModal() {
+      demoModalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        const firstInput = demoForm.querySelector('input');
+        if (firstInput) firstInput.focus();
+      }, 350);
+    }
+
+    /* Cerrar */
+    function closeDemoModal() {
+      demoModalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Eventos de apertura */
+    demoTriggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openDemoModal();
+      });
+    });
+
+    /* Eventos de cierre */
+    demoModalClose.addEventListener('click', closeDemoModal);
+    demoModalOverlay.addEventListener('click', (e) => {
+      if (e.target === demoModalOverlay) closeDemoModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && demoModalOverlay.classList.contains('open')) closeDemoModal();
+    });
+
+    /* Toast */
+    function showToast(message, isError = false) {
+      document.querySelectorAll('.demo-toast').forEach(t => t.remove());
+      const toast = document.createElement('div');
+      toast.className = 'demo-toast' + (isError ? ' error' : '');
+      toast.innerHTML = `
+        <i class="bi ${isError ? 'bi-x-circle-fill' : 'bi-check-circle-fill'} toast-icon"></i>
+        <span>${message}</span>
+      `;
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('show')));
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 450);
+      }, 5000);
+    }
+
+    /* Estado del botón */
+    function setSubmitLoading(isLoading) {
+      demoSubmitBtn.disabled = isLoading;
+      if (isLoading) {
+        demoSubmitBtn.classList.add('loading');
+        demoSubmitBtn.innerHTML = '<span class="btn-text">Enviando...</span><span class="btn-spinner"></span>';
+      } else {
+        demoSubmitBtn.classList.remove('loading');
+        demoSubmitBtn.innerHTML = '<span class="btn-text">SOLICITAR DEMO</span>';
+      }
+    }
+
+    /* Envío del formulario */
+    demoForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const privacyCheck = document.getElementById('demoPrivacy');
+      if (!privacyCheck.checked) {
+        showToast('Debes aceptar la Política de Tratamiento de Datos.', true);
+        return;
+      }
+
+      const nombre    = document.getElementById('demoNombre').value.trim();
+      const apellidos = document.getElementById('demoApellidos').value.trim();
+      const email     = document.getElementById('demoEmail').value.trim();
+      const tel       = document.getElementById('demoTel').value.trim();
+      const empresa   = document.getElementById('demoEmpresa').value.trim();
+      const ciudad    = document.getElementById('demoCiudad').value.trim();
+
+      const templateParams = {
+        from_name  : `${nombre} ${apellidos}`,
+        from_email : email,
+        to_email   : email,
+        phone      : tel     || 'No proporcionado',
+        company    : empresa || 'No proporcionada',
+        city       : ciudad  || 'No proporcionada',
+      };
+
+      setSubmitLoading(true);
+
+      try {
+        const emailJsNoConfig =
+          EMAILJS_PUBLIC_KEY  === 'TU_PUBLIC_KEY' ||
+          EMAILJS_SERVICE_ID  === 'TU_SERVICE_ID' ||
+          EMAILJS_TEMPLATE_ID === 'TU_TEMPLATE_ID';
+
+        if (emailJsNoConfig) {
+          await new Promise(r => setTimeout(r, 1200));
+        } else {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+        }
+
+        showToast(`¡Solicitud recibida, ${nombre}! Pronto nos pondremos en contacto contigo.`);
+        demoForm.reset();
+        closeDemoModal();
+
+      } catch (error) {
+        console.error('Error al enviar:', error);
+        showToast('Ocurrió un error al enviar. Por favor intenta nuevamente.', true);
+      } finally {
+        setSubmitLoading(false);
+      }
+    });
+    </script>
+</body>
+
+</html>
