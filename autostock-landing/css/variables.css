@@ -5,20 +5,27 @@
    ============================================================ */
 
 :root {
-  /* Colores principales */
-  --color-bg:         #FFFFFF;
-  --color-dark:       #111827;
-  --color-accent:     #2DD4BF;
-  --color-dark-alt:   #1F2937;
-  --color-deep:       #345253;
-  --color-gray-light: #F3F4F6;
+  /* Colores principales — Refinados para look premium */
+  --color-bg:         #0F172A; /* Fondo oscuro azulado profundo */
+  --color-dark:       #020617; /* Negro profundo */
+  --color-accent:     #2DD4BF; /* Teal vibrante */
+  --color-accent-rgb: 45, 212, 191;
+  --color-dark-alt:   #1E293B;
+  --color-gray-light: #F8FAFC;
+  --color-white:      #FFFFFF;
 
   /* Colores de estado */
-  --color-success:    #09B423;
-  --color-warning:    #B45309;
-  --color-error:      #B40909;
+  --color-success:    #10B981;
+  --color-warning:    #F59E0B;
+  --color-error:      #EF4444;
   --color-info:       #3B82F6;
   --color-black:      #000000;
+
+  /* Glassmorphism Design Tokens */
+  --glass-bg:         rgba(255, 255, 255, 0.03);
+  --glass-border:     rgba(255, 255, 255, 0.1);
+  --glass-shadow:     0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --glass-blur:       12px;
 
   /* Tipografía */
   --font-heading: 'Inter', 'Roboto', sans-serif;

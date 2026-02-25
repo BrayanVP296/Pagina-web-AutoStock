@@ -81,42 +81,62 @@
 
                     <!-- Right column — Dashboard mockup -->
                     <div class="hero-mockup">
-                        <div class="dashboard-card">
-                            <div class="dash-sidebar">
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <i class="bi bi-box-seam"></i>
-                                <i class="bi bi-arrow-down-up"></i>
-                                <i class="bi bi-people"></i>
-                                <i class="bi bi-gear"></i>
-                            </div>
-                            <div class="dash-main">
-                                <div class="dash-header">
-                                    <span class="dash-header-title">Dashboard AutoStock</span>
-                                    <span class="dash-header-badge">En vivo</span>
+                        <div class="dashboard-flipper">
+                            <div class="dashboard-inner">
+                                <!-- Front Face -->
+                                <div class="card-front">
+                                    <div class="dashboard-card">
+                                        <div class="dash-sidebar">
+                                            <i class="bi bi-grid-1x2-fill"></i>
+                                            <i class="bi bi-box-seam"></i>
+                                            <i class="bi bi-arrow-down-up"></i>
+                                            <i class="bi bi-people"></i>
+                                            <i class="bi bi-gear"></i>
+                                        </div>
+                                        <div class="dash-main">
+                                            <div class="dash-header">
+                                                <span class="dash-header-title">Dashboard AutoStock</span>
+                                                <span class="dash-header-badge">En vivo</span>
+                                            </div>
+                                            <div class="dash-kpis">
+                                                <div class="dash-kpi">
+                                                    <div class="dash-kpi-label"><i class="bi bi-box-seam"></i> Productos
+                                                    </div>
+                                                    <div class="dash-kpi-value">1,248</div>
+                                                    <div class="dash-kpi-change up">↑ 12% este mes</div>
+                                                </div>
+                                                <div class="dash-kpi">
+                                                    <div class="dash-kpi-label"><i class="bi bi-arrow-down-circle"></i>
+                                                        Entradas hoy
+                                                    </div>
+                                                    <div class="dash-kpi-value">37</div>
+                                                    <div class="dash-kpi-change up">↑ 8% vs ayer</div>
+                                                </div>
+                                                <div class="dash-kpi">
+                                                    <div class="dash-kpi-label"><i
+                                                            class="bi bi-exclamation-triangle"></i> Bajo
+                                                        Stock</div>
+                                                    <div class="dash-kpi-value">5</div>
+                                                    <div class="dash-kpi-change down">⚠ Requiere atención</div>
+                                                </div>
+                                                <div class="dash-kpi">
+                                                    <div class="dash-kpi-label"><i class="bi bi-clipboard-check"></i>
+                                                        Novedades
+                                                    </div>
+                                                    <div class="dash-kpi-value">12</div>
+                                                    <div class="dash-kpi-change up">✓ Al día</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="dash-kpis">
-                                    <div class="dash-kpi">
-                                        <div class="dash-kpi-label"><i class="bi bi-box-seam"></i> Productos</div>
-                                        <div class="dash-kpi-value">1,248</div>
-                                        <div class="dash-kpi-change up">↑ 12% este mes</div>
-                                    </div>
-                                    <div class="dash-kpi">
-                                        <div class="dash-kpi-label"><i class="bi bi-arrow-down-circle"></i> Entradas hoy
-                                        </div>
-                                        <div class="dash-kpi-value">37</div>
-                                        <div class="dash-kpi-change up">↑ 8% vs ayer</div>
-                                    </div>
-                                    <div class="dash-kpi">
-                                        <div class="dash-kpi-label"><i class="bi bi-exclamation-triangle"></i> Bajo
-                                            Stock</div>
-                                        <div class="dash-kpi-value">5</div>
-                                        <div class="dash-kpi-change down">⚠ Requiere atención</div>
-                                    </div>
-                                    <div class="dash-kpi">
-                                        <div class="dash-kpi-label"><i class="bi bi-clipboard-check"></i> Novedades
-                                        </div>
-                                        <div class="dash-kpi-value">12</div>
-                                        <div class="dash-kpi-change up">✓ Al día</div>
+                                <!-- Back Face -->
+                                <div class="card-back">
+                                    <div class="back-content">
+                                        <img src="assets/img/logo.png" alt="AutoStock Logo">
+                                        <span class="back-brand"><span class="auto">Auto</span><span
+                                                class="stock">Stock</span></span>
+                                        <p>Gestión Inteligente</p>
                                     </div>
                                 </div>
                             </div>
@@ -222,42 +242,53 @@
                 </div>
 
                 <!-- Tarjetas de capacidades -->
-                <div class="api-grid">
-                    <div class="api-card reveal">
-                        <div class="api-card-icon"><i class="bi bi-key-fill"></i></div>
-                        <h3>Acceso por API Key</h3>
-                        <p>Cada cliente recibe una clave de acceso única. Gestiona tus integraciones de forma segura sin
-                            exponer credenciales del sistema.</p>
+                <div class="api-grid-container">
+                    <div class="api-grid">
+                        <div class="api-card reveal">
+                            <div class="api-card-icon"><i class="bi bi-key-fill"></i></div>
+                            <h3>Acceso por API Key</h3>
+                            <p>Cada cliente recibe una clave de acceso única. Gestiona tus integraciones de forma segura
+                                sin
+                                exponer credenciales del sistema.</p>
+                        </div>
+                        <div class="api-card reveal">
+                            <div class="api-card-icon"><i class="bi bi-arrow-repeat"></i></div>
+                            <h3>Sincronización en tiempo real</h3>
+                            <p>Consulta y actualiza el stock de tus productos desde cualquier aplicación externa. Los
+                                datos
+                                siempre están actualizados.</p>
+                        </div>
+                        <div class="api-card reveal">
+                            <div class="api-card-icon"><i class="bi bi-shield-lock-fill"></i></div>
+                            <h3>Autenticación JWT segura</h3>
+                            <p>Cada petición está protegida con tokens JWT. Control total sobre quién accede y qué puede
+                                hacer con tus datos.</p>
+                        </div>
                     </div>
-                    <div class="api-card reveal">
-                        <div class="api-card-icon"><i class="bi bi-arrow-repeat"></i></div>
-                        <h3>Sincronización en tiempo real</h3>
-                        <p>Consulta y actualiza el stock de tus productos desde cualquier aplicación externa. Los datos
-                            siempre están actualizados.</p>
-                    </div>
-                    <div class="api-card reveal">
-                        <div class="api-card-icon"><i class="bi bi-shield-lock-fill"></i></div>
-                        <h3>Autenticación JWT segura</h3>
-                        <p>Cada petición está protegida con tokens JWT. Control total sobre quién accede y qué puede
-                            hacer con tus datos.</p>
-                    </div>
-                    <div class="api-card reveal">
-                        <div class="api-card-icon"><i class="bi bi-plug-fill"></i></div>
-                        <h3>Integración con Bsale</h3>
-                        <p>Conecta directamente con tu sistema de ventas Bsale. Las ventas se reflejan automáticamente
-                            en el inventario.</p>
-                    </div>
-                    <div class="api-card reveal">
-                        <div class="api-card-icon"><i class="bi bi-buildings-fill"></i></div>
-                        <h3>Multi-empresa</h3>
-                        <p>La arquitectura multi-tenancy permite que cada empresa gestione su inventario de forma
-                            completamente independiente y segura.</p>
-                    </div>
-                    <div class="api-card reveal">
-                        <div class="api-card-icon"><i class="bi bi-file-earmark-code-fill"></i></div>
-                        <h3>Documentación incluida</h3>
-                        <p>Todos los endpoints están documentados. Tu equipo técnico puede comenzar la integración el
-                            mismo día de la contratación.</p>
+
+                    <!-- API Terminal Mockup -->
+                    <div class="api-mockup reveal">
+                        <div class="terminal-window">
+                            <div class="terminal-header">
+                                <div class="terminal-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="terminal-title">GET /api/v1/products/stock</div>
+                            </div>
+                            <div class="terminal-body">
+                                <pre><code><span class="code-comment">// Response Example</span>
+{
+  <span class="code-key">"status"</span>: <span class="code-val">"success"</span>,
+  <span class="code-key">"data"</span>: {
+    <span class="code-key">"sku"</span>: <span class="code-val">"AST-2024-X"</span>,
+    <span class="code-key">"product"</span>: <span class="code-val">"Sensor Industrial"</span>,
+    <span class="code-key">"stock"</span>: <span class="code-num">148</span>,
+    <span class="code-key">"warehouse"</span>: <span class="code-val">"Central-A1"</span>,
+    <span class="code-key">"last_updated"</span>: <span class="code-val">"2024-02-24T08:00:00Z"</span>
+  }
+}</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -281,40 +312,72 @@
                     <p>Desarrollado por aprendices del SENA — Análisis y Desarrollo de Software</p>
                 </div>
                 <div class="team-grid">
-                    <div class="team-card reveal">
-                        <div class="team-avatar">PD</div>
-                        <h3>Pedro Daniel Pirachican Vargas</h3>
-                        <div class="team-role">🛠️ Líder Técnico / Backend &amp; Arquitectura</div>
-                        <p class="team-desc">Responsable de la arquitectura del sistema, backend con FastAPI, base de
-                            datos, seguridad e integraciones externas.</p>
-                        <div class="team-tags">
-                            <span>FastAPI</span>
-                            <span>Python</span>
-                            <span>MySQL</span>
-                            <span>DevOps</span>
-                            <span>Arquitectura</span>
-                        </div>
-                        <div class="team-footer">
-                            <div>🎓 SENA — Análisis y Desarrollo de Software (ADSO)</div>
-                            <div>📍 Tunja, Colombia</div>
+                    <!-- Pedro -->
+                    <div class="team-flipper reveal">
+                        <div class="team-inner">
+                            <div class="team-card front">
+                                <div class="team-avatar">PD</div>
+                                <h3>Pedro Daniel Pirachican Vargas</h3>
+                                <div class="team-role">🛠️ Líder Técnico / Backend &amp; Arquitectura</div>
+                                <p class="team-desc">Responsable de la arquitectura del sistema, backend con FastAPI,
+                                    base de
+                                    datos, seguridad e integraciones externas.</p>
+                                <div class="team-tags">
+                                    <span>FastAPI</span>
+                                    <span>Python</span>
+                                    <span>MySQL</span>
+                                    <span>DevOps</span>
+                                    <span>Arquitectura</span>
+                                </div>
+                                <div class="team-footer">
+                                    <div>🎓 SENA — Análisis y Desarrollo de Software (ADSO)</div>
+                                    <div>📍 Tunja, Colombia</div>
+                                </div>
+                            </div>
+                            <div class="team-card back">
+                                <div class="back-content">
+                                    <div class="gif-placeholder">
+                                        <i class="bi bi-play-circle-fill"></i>
+                                        <span>Espacio para GIF</span>
+                                    </div>
+                                    <h3 class="back-name">Pedro Pirachican</h3>
+                                    <p class="back-tagline">Innovación Backend</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="team-card reveal">
-                        <div class="team-avatar">BR</div>
-                        <h3>Brayan Ricardo Vera Parra</h3>
-                        <div class="team-role">🎨 Frontend &amp; Experiencia de Usuario</div>
-                        <p class="team-desc">Encargado del desarrollo de la interfaz, UI/UX, consumo de APIs y
-                            optimización de la experiencia de usuario.</p>
-                        <div class="team-tags">
-                            <span>React.js</span>
-                            <span>UI/UX</span>
-                            <span>CSS</span>
-                            <span>APIs</span>
-                            <span>Testing</span>
-                        </div>
-                        <div class="team-footer">
-                            <div>🎓 SENA — Análisis y Desarrollo de Software (ADSO)</div>
-                            <div>📍 Tunja, Colombia</div>
+
+                    <!-- Brayan -->
+                    <div class="team-flipper reveal">
+                        <div class="team-inner">
+                            <div class="team-card front">
+                                <div class="team-avatar">BR</div>
+                                <h3>Brayan Ricardo Vera Parra</h3>
+                                <div class="team-role">🎨 Frontend &amp; Experiencia de Usuario</div>
+                                <p class="team-desc">Encargado del desarrollo de la interfaz, UI/UX, consumo de APIs y
+                                    optimización de la experiencia de usuario.</p>
+                                <div class="team-tags">
+                                    <span>React.js</span>
+                                    <span>UI/UX</span>
+                                    <span>CSS</span>
+                                    <span>APIs</span>
+                                    <span>Testing</span>
+                                </div>
+                                <div class="team-footer">
+                                    <div>🎓 SENA — Análisis y Desarrollo de Software (ADSO)</div>
+                                    <div>📍 Tunja, Colombia</div>
+                                </div>
+                            </div>
+                            <div class="team-card back">
+                                <div class="back-content">
+                                    <div class="gif-placeholder">
+                                        <i class="bi bi-play-circle-fill"></i>
+                                        <span>Espacio para GIF</span>
+                                    </div>
+                                    <h3 class="back-name">Brayan Vera</h3>
+                                    <p class="back-tagline">Visual Experience</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -336,7 +399,7 @@
                 <div class="cta-buttons reveal">
                     <button class="btn-cta-big" data-open-demo><i class="bi bi-rocket-takeoff"></i> Solicitar
                         Demo</button>
-                    <a href="https://wa.me/573001234567?text=Hola%2C%20quiero%20agendar%20una%20demo%20de%20AutoStock"
+                    <a href="https://wa.me/573114846947?text=Hola%2C%20estoy%20interesado%20en%20adquirir%20los%20servicios%20de%20AutoStock"
                         target="_blank" rel="noopener" class="btn-whatsapp"><i class="bi bi-whatsapp"></i> Contáctanos
                         por WhatsApp</a>
                 </div>
