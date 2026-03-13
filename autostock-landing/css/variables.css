@@ -6,28 +6,37 @@
 
 :root {
   /* Colores principales — Refinados para look premium */
-  --color-bg:         #0F172A; /* Fondo oscuro azulado profundo */
-  --color-dark:       #020617; /* Negro profundo */
-  --color-accent:     #2DD4BF; /* Teal vibrante */
+  --color-bg: #0F172A;
+  /* Fondo oscuro azulado profundo */
+  --color-dark: #020617;
+  /* Negro profundo */
+  --color-accent: #2DD4BF;
+  /* Teal vibrante */
   --color-accent-rgb: 45, 212, 191;
-  --color-dark-alt:   #1E293B;
+  --color-dark-alt: #1E293B;
   --color-gray-light: #F8FAFC;
-  --color-white:      #FFFFFF;
+  --color-white: #FFFFFF;
 
   /* Colores de estado */
-  --color-success:    #10B981;
-  --color-warning:    #F59E0B;
-  --color-error:      #EF4444;
-  --color-info:       #3B82F6;
-  --color-black:      #000000;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+  --color-black: #000000;
 
   /* Glassmorphism Design Tokens */
-  --glass-bg:         rgba(255, 255, 255, 0.03);
-  --glass-border:     rgba(255, 255, 255, 0.1);
-  --glass-shadow:     0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  --glass-blur:       12px;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --glass-blur: 12px;
 
   /* Tipografía */
   --font-heading: 'Inter', 'Roboto', sans-serif;
-  --font-body:    'DM Sans', 'Roboto', sans-serif;
+  --font-body: 'DM Sans', 'Roboto', sans-serif;
+
+  /* Mesh Gradient Colors */
+  --mesh-color-1: #0F172A;
+  --mesh-color-2: #1E1B4B;
+  --mesh-color-3: #020617;
+  --mesh-color-4: #064E3B;
 }

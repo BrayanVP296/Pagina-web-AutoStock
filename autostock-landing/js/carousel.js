@@ -117,8 +117,9 @@
         track.innerHTML = '';
         cardsData.forEach((card, i) => {
             const el = document.createElement('div');
-            el.className = 'carousel-item';
+            el.className = 'carousel-item reveal glow-on-hover';
             el.setAttribute('data-index', i);
+            el.setAttribute('data-stagger', (i % 3) + 1); // Stagger by 3s since 3 are usually visible
             el.innerHTML = `
         <img class="carousel-img" src="${card.img}" alt="${card.title}" loading="lazy">
         <div class="carousel-body">
