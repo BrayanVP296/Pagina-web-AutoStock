@@ -1,19 +1,28 @@
 (function () {
-    /* Bloquear scroll mientras carga */
+    // Bloquear scroll durante el splash
     document.body.classList.add('splash-active');
 
-    /* Ocultar el splash después de 2.4s */
-    setTimeout(function () {
+    function hideSplash() {
         var splash = document.getElementById('splash');
-        if (!splash) return;
+        if (splash) {
+            splash.classList.add('splash-exit');
+            setTimeout(function () {
+                splash.style.display = 'none';
+            }, 500);
+        }
+        // SIEMPRE restaurar el scroll, pase lo que pase
+        document.body.classList.remove('splash-active');
+        document.body.style.overflow = '';
+    }
 
-        /* Activar animación de salida */
-        splash.classList.add('splash-exit');
+    // Ocultar splash a los 2.6s
+    setTimeout(hideSplash, 2600);
 
-        /* Restaurar scroll y eliminar el splash del DOM */
-        setTimeout(function () {
-            splash.style.display = 'none';
-            document.body.classList.remove('splash-active');
-        }, 500);
-    }, 2400);
+    // Fallback de seguridad: si algo falla, ocultar a los 4s
+    setTimeout(hideSplash, 4000);
+
+    // Fallback extra: si la página ya cargó, ocultar inmediatamente
+    window.addEventListener('load', function () {
+        setTimeout(hideSplash, 2600);
+    });
 })();

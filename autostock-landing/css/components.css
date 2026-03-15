@@ -1,32 +1,30 @@
 /* ============================================================
    AUTOSTOCK — Componentes reutilizables
-   Estilos de elementos que se repiten en múltiples secciones:
-   contenedor, botones, encabezados de sección y utilidades.
    ============================================================ */
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1020px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .section-header h2 {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 800;
     color: var(--color-dark);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .section-header p {
     color: #6B7280;
-    font-size: 16px;
-    max-width: 560px;
+    font-size: 14px;
+    max-width: 476px;
     margin: 0 auto;
 }
 
@@ -37,8 +35,8 @@
     background: var(--color-accent);
     color: var(--color-dark);
     font-weight: 700;
-    font-size: 16px;
-    padding: 14px 32px;
+    font-size: 14px;
+    padding: 11px 24px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -58,8 +56,8 @@
     background: transparent;
     color: #FFFFFF;
     font-weight: 600;
-    font-size: 16px;
-    padding: 14px 32px;
+    font-size: 14px;
+    padding: 11px 24px;
     border-radius: 10px;
     border: 2px solid var(--color-accent);
     cursor: pointer;
@@ -73,10 +71,10 @@
 
 .btn-cta-nav {
     background: var(--color-accent);
-    color: var(--color-dark);
+    color: #FFFFFF !important;
     font-weight: 700;
-    font-size: 14px;
-    padding: 10px 20px;
+    font-size: 13px;
+    padding: 8px 16px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -84,6 +82,7 @@
 }
 
 .btn-cta-nav:hover {
+    color: #FFFFFF !important;
     box-shadow: 0 4px 15px rgba(45, 212, 191, 0.4);
     filter: brightness(1.1);
 }
@@ -95,8 +94,8 @@
     background: var(--color-accent);
     color: var(--color-dark);
     font-weight: 700;
-    font-size: 18px;
-    padding: 16px 40px;
+    font-size: 15px;
+    padding: 13px 30px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -110,9 +109,6 @@
     filter: brightness(1.08);
 }
 
-/* ============================================================
-   UTILITY: SCROLL-REVEAL (optional light fade-in)
-   ============================================================ */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -126,6 +122,6 @@
 
 @media (min-width: 1024px) {
     .section-header h2 {
-        font-size: 32px;
+        font-size: 26px;
     }
 }

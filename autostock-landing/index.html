@@ -29,201 +29,7 @@
     <!-- CTA Section fix + Modal CSS — embebido directamente -->
 
     <!-- Splash Screen CSS -->
-    <style>
-        /* ── SPLASH SCREEN ───────────────────────────────────────── */
-        #splash {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: #111827;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 28px;
-        }
-
-        /* Logo — efecto zoom desde lejos + enfoque progresivo */
-        .splash-logo-wrap {
-            animation: splashZoomIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: scale(0.1) translateY(80px);
-        }
-
-        .splash-logo-wrap img {
-            width: 352px;
-            height: 352px;
-            object-fit: contain;
-            filter: blur(14px) brightness(0.3);
-            animation: splashFocus 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-        }
-
-        /* Nombre AutoStock */
-        .splash-brand {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: splashFadeUp 0.7s ease 1.2s forwards;
-            text-align: center;
-        }
-
-        .splash-auto {
-            font-family: 'Inter', 'Roboto', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            color: #FFFFFF;
-            letter-spacing: -2px;
-        }
-
-        .splash-stock {
-            font-family: 'Inter', 'Roboto', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            color: #2DD4BF;
-            letter-spacing: -2px;
-        }
-
-        .splash-tagline {
-            font-family: 'DM Sans', 'Roboto', sans-serif;
-            font-size: 13px;
-            color: #6B7280;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 8px;
-            opacity: 0;
-            animation: splashFadeUp 0.6s ease 1.5s forwards;
-        }
-
-        /* Barra de progreso */
-        .splash-progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            width: 0%;
-            background: linear-gradient(90deg, #2DD4BF, #3B82F6);
-            animation: splashProgress 2.5s ease forwards;
-            border-radius: 0 2px 2px 0;
-        }
-
-        /* Salida */
-        #splash.splash-exit {
-            animation: splashFadeOut 0.5s ease forwards;
-            pointer-events: none;
-        }
-
-        /* Keyframes */
-        @keyframes splashZoomIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.08) translateY(100px);
-            }
-
-            60% {
-                opacity: 1;
-                transform: scale(1.04) translateY(-6px);
-            }
-
-            80% {
-                transform: scale(0.98) translateY(2px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        @keyframes splashFocus {
-            0% {
-                filter: blur(16px) brightness(0.2);
-            }
-
-            50% {
-                filter: blur(5px) brightness(0.6);
-            }
-
-            100% {
-                filter: blur(0px) brightness(1);
-            }
-        }
-
-        @keyframes splashFadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes splashProgress {
-            0% {
-                width: 0%;
-            }
-
-            20% {
-                width: 15%;
-            }
-
-            60% {
-                width: 70%;
-            }
-
-            100% {
-                width: 100%;
-            }
-        }
-
-        @keyframes splashFadeOut {
-            from {
-                opacity: 1;
-            }
-
-            to {
-                opacity: 0;
-            }
-        }
-
-        body.splash-active {
-            overflow: hidden;
-        }
-
-        /* ── EQUIPO: Foto frontal y video trasero ─────────────────── */
-        .team-avatar-photo {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--color-accent, #2DD4BF);
-            margin: 0 auto 16px;
-            flex-shrink: 0;
-        }
-
-        .team-avatar-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .back-video-wrap {
-            width: 100%;
-            height: 200px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 16px;
-            background: #000;
-        }
-
-        .back-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="css/splash.css">
 </head>
 
 <body>
@@ -234,9 +40,6 @@
             <img src="assets/img/logo.png" alt="AutoStock logo">
         </div>
         <div class="splash-brand">
-            <div>
-                <span class="splash-auto">Auto</span><span class="splash-stock">Stock</span>
-            </div>
             <div class="splash-tagline">Sistema Inteligente de Inventarios</div>
         </div>
         <div class="splash-progress"></div>
@@ -249,7 +52,6 @@
     <header class="navbar" id="navbar">
         <div class="container">
             <a href="#inicio" class="navbar-brand" aria-label="AutoStock inicio">
-                <img src="assets/img/logo.png" alt="AutoStock logo">
                 <span class="brand-text"><span class="auto">Auto</span><span class="stock">Stock</span></span>
             </a>
 
@@ -315,28 +117,28 @@
                                                 <div class="dash-kpi">
                                                     <div class="dash-kpi-label"><i class="bi bi-box-seam"></i> Productos
                                                     </div>
-                                                    <div class="dash-kpi-value">1,248</div>
+                                                    <div class="dash-kpi-value" id="kpi-productos">1,248</div>
                                                     <div class="dash-kpi-change up">↑ 12% este mes</div>
                                                 </div>
                                                 <div class="dash-kpi">
                                                     <div class="dash-kpi-label"><i class="bi bi-arrow-down-circle"></i>
                                                         Entradas hoy
                                                     </div>
-                                                    <div class="dash-kpi-value">37</div>
+                                                    <div class="dash-kpi-value" id="kpi-entradas">37</div>
                                                     <div class="dash-kpi-change up">↑ 8% vs ayer</div>
                                                 </div>
                                                 <div class="dash-kpi">
                                                     <div class="dash-kpi-label"><i
                                                             class="bi bi-exclamation-triangle"></i> Bajo
                                                         Stock</div>
-                                                    <div class="dash-kpi-value">5</div>
+                                                    <div class="dash-kpi-value" id="kpi-bajo-stock">5</div>
                                                     <div class="dash-kpi-change down">⚠ Requiere atención</div>
                                                 </div>
                                                 <div class="dash-kpi">
                                                     <div class="dash-kpi-label"><i class="bi bi-clipboard-check"></i>
                                                         Novedades
                                                     </div>
-                                                    <div class="dash-kpi-value">12</div>
+                                                    <div class="dash-kpi-value" id="kpi-novedades">12</div>
                                                     <div class="dash-kpi-change up">✓ Al día</div>
                                                 </div>
                                             </div>
@@ -345,11 +147,52 @@
                                 </div>
                                 <!-- Back Face -->
                                 <div class="card-back">
-                                    <div class="back-content">
-                                        <img src="assets/img/logo.png" alt="AutoStock Logo">
-                                        <span class="back-brand"><span class="auto">Auto</span><span
-                                                class="stock">Stock</span></span>
-                                        <p>Gestión Inteligente</p>
+                                    <div class="hero-back-content">
+                                        <h4>¡Transforma tu Negocio!</h4>
+                                        <div class="hero-carousel-container">
+                                            <div class="hero-carousel-track">
+                                                <!-- Slide 1 -->
+                                                <div class="hero-carousel-slide">
+                                                    <div class="benefit-card-back glow-on-hover">
+                                                        <i class="bi bi-clock-history"></i>
+                                                        <p>Ahorra <strong>horas</strong> de trabajo manual cada semana.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <!-- Slide 2 -->
+                                                <div class="hero-carousel-slide">
+                                                    <div class="benefit-card-back glow-on-hover">
+                                                        <i class="bi bi-shield-check"></i>
+                                                        <p>Reduce drásticamente los <strong>errores</strong> operativos.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <!-- Slide 3 -->
+                                                <div class="hero-carousel-slide">
+                                                    <div class="benefit-card-back glow-on-hover">
+                                                        <i class="bi bi-graph-up-arrow"></i>
+                                                        <p>Toma decisiones con datos <strong>en tiempo real</strong>.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <!-- Slide 4 -->
+                                                <div class="hero-carousel-slide">
+                                                    <div class="benefit-card-back glow-on-hover">
+                                                        <i class="bi bi-phone"></i>
+                                                        <p>Control total de tu negocio <strong>24/7</strong> donde
+                                                            estés.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Slide 5 (Clone para loop) -->
+                                                <div class="hero-carousel-slide">
+                                                    <div class="benefit-card-back glow-on-hover">
+                                                        <i class="bi bi-clock-history"></i>
+                                                        <p>Ahorra <strong>horas</strong> de trabajo manual cada semana.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -437,117 +280,128 @@
         <section class="api-section" id="api">
             <div class="container">
 
-                <!-- Encabezado -->
-                <div class="section-header reveal">
-                    <h2>Conecta AutoStock con tu negocio</h2>
-                    <p>Nuestra API REST te permite integrar AutoStock con tus aplicaciones, ERP o plataformas externas
-                        en minutos</p>
-                </div>
-
-                <!-- Intro con badge -->
-                <div class="api-intro reveal">
-                    <div class="api-badge"><i class="bi bi-lightning-charge-fill"></i> API REST disponible para clientes
-                    </div>
-                    <p class="api-lead">¿Tu empresa ya tiene sistemas propios? No hay problema. AutoStock expone una
-                        <strong>API REST segura y documentada</strong> para que puedas conectar tu software de ventas,
-                        tu ERP o cualquier aplicación interna directamente con el inventario en tiempo real.
+                <!-- Encabezado Unificado -->
+                <div class="api-intro reveal" style="max-width: 765px; margin: 0 auto 50px; text-align: center;">
+                    <h2 class="api-subtitle">Escalabilidad Sin Límites
+                    </h2>
+                    <p class="api-lead">
+                        ¿Tu empresa ya tiene sistemas propios? <strong>No hay problema.</strong> Conecta AutoStock con
+                        tu negocio usando nuestra API REST.
+                    </p>
+                    <p class="api-lead">
+                        Integra tu ERP, software de ventas o aplicaciones internas en minutos. Diseñada para empresas
+                        que no se detienen, permitiendo que tus datos fluyan sin fricciones y en tiempo real.
                     </p>
                 </div>
 
-                <!-- Split Layout: Content + Visual -->
-                <div class="api-content-split">
+                <!-- Visual Side: Modern Integration Card (Centered, full width) -->
+                <div class="api-visual-side reveal" data-stagger="1" style="max-width: 850px; margin: 0 auto;">
+                    <div class="integration-card glow-on-hover">
+                        <div class="card-glass-header">
+                            <div class="dots-window">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="card-status"><span class="status-dot"></span> API en línea</div>
+                        </div>
 
-                    <!-- Content Side -->
-                    <div class="api-info-side reveal">
-                        <h3 class="api-subtitle">Escalabilidad sin Límites</h3>
-                        <p>Diseñada para empresas que no se detienen. Nuestra API permite que tus datos fluyan entre
-                            AutoStock y tus herramientas favoritas sin fricciones.</p>
-
-                        <ul class="api-benefits-list">
-                            <li>
-                                <div class="benefit-icon"><i class="bi bi-check-circle-fill"></i></div>
-                                <div class="benefit-text">
-                                    <strong>Integración en minutos:</strong> Documentación clara para que tu equipo
-                                    técnico empiece a trabajar hoy mismo.
+                        <div class="card-visual-body">
+                            <div class="integration-flow">
+                                <div class="system-node node-external">
+                                    <i class="bi bi-laptop"></i>
+                                    <span>Tu Sistema</span>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="benefit-icon"><i class="bi bi-check-circle-fill"></i></div>
-                                <div class="benefit-text">
-                                    <strong>Control Total:</strong> Consulta niveles de stock, registra ventas y
-                                    gestiona alertas desde cualquier lugar.
+                                <div class="flow-line">
+                                    <div class="pulse-ball"></div>
+                                    <div class="pulse-ball"></div>
+                                    <div class="pulse-ball"></div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="benefit-icon"><i class="bi bi-check-circle-fill"></i></div>
-                                <div class="benefit-text">
-                                    <strong>Webhooks en Vivo:</strong> Recibe notificaciones automáticas cada vez que
-                                    ocurre un cambio en tu bodega.
+                                <div class="system-node node-autostock">
+                                    <img src="assets/img/logo.png" alt="AS">
+                                    <span>AutoStock</span>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Visual Side: Modern Integration Card -->
-                    <div class="api-visual-side reveal" data-stagger="1">
-                        <div class="integration-card glow-on-hover">
-                            <div class="card-glass-header">
-                                <div class="dots-window">
-                                    <span></span><span></span><span></span>
-                                </div>
-                                <div class="card-status"><span class="status-dot"></span> API en línea</div>
                             </div>
 
-                            <div class="card-visual-body">
-                                <div class="integration-flow">
-                                    <div class="system-node node-external">
-                                        <i class="bi bi-laptop"></i>
-                                        <span>Tu Sistema</span>
+                            <div class="api-carousel-container">
+                                <div class="api-carousel-track">
+                                    <!-- Slide 1 -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-shield-lock"></i>
+                                            <h4>Seguridad JWT</h4>
+                                            <p>Autenticación de grado bancario para proteger la información.</p>
+                                        </div>
                                     </div>
-                                    <div class="flow-line">
-                                        <div class="pulse-ball"></div>
+                                    <!-- Slide 2 -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-lightning"></i>
+                                            <h4>Baja Latencia</h4>
+                                            <p>Infraestructura global para respuestas en menos de 50ms.</p>
+                                        </div>
                                     </div>
-                                    <div class="system-node node-autostock">
-                                        <img src="assets/img/logo.png" alt="AS">
-                                        <span>AutoStock</span>
+                                    <!-- Slide 3 -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-file-earmark-code"></i>
+                                            <h4>Documentación</h4>
+                                            <p>Ejemplos interactivos y soporte premium.</p>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="mini-terminal-wrap">
-                                    <div class="terminal-tabs">
-                                        <button class="t-tab active" data-lang="bash">curl</button>
-                                        <button class="t-tab" data-lang="python">Python</button>
-                                        <button class="t-tab" data-lang="js">JS</button>
+                                    <!-- Slide 4 -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-graph-up-arrow"></i>
+                                            <h4>Crecimiento Total</h4>
+                                            <p>Escalabilidad sin límites a medida que creces.</p>
+                                        </div>
                                     </div>
-                                    <div class="terminal-code-snip" id="terminalCode">
-                                        <code class="code-comment">// Respuesta en tiempo real</code><br>
-                                        <code>{ "status": "success", "stock": 542 }</code>
+                                    <!-- Slide 5 -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                            <h4>Sincronía 24/7</h4>
+                                            <p>Tus datos siempre actualizados con webhooks útiles.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Slide 6 (Integracion en minutos) -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-plug"></i>
+                                            <h4>Integración en minutos</h4>
+                                            <p>Documentación clara para que tu equipo empiece hoy mismo.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Slide 7 (Control Total) -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-sliders"></i>
+                                            <h4>Control Total</h4>
+                                            <p>Gestiona niveles de stock y alertas desde cualquier lugar.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Slide 8 (Webhooks en vivo) -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-bell-fill"></i>
+                                            <h4>Webhooks en Vivo</h4>
+                                            <p>Recibe notificaciones automáticas ante cualquier cambio.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Slide 1 Clone -->
+                                    <div class="api-carousel-slide">
+                                        <div class="api-mini-card glow-on-hover">
+                                            <i class="bi bi-shield-lock"></i>
+                                            <h4>Seguridad JWT</h4>
+                                            <p>Autenticación de grado bancario para proteger la información.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
-                <!-- Bottom Pillars -->
-                <div class="api-pillars-grid">
-                    <div class="pillar-card reveal glow-on-hover" data-stagger="2">
-                        <i class="bi bi-shield-lock"></i>
-                        <h4>Seguridad JWT</h4>
-                        <p>Autenticación de grado bancario para proteger cada bit de información.</p>
-                    </div>
-                    <div class="pillar-card reveal glow-on-hover" data-stagger="3">
-                        <i class="bi bi-lightning"></i>
-                        <h4>Baja Latencia</h4>
-                        <p>Infraestructura global para respuestas en menos de 50ms.</p>
-                    </div>
-                    <div class="pillar-card reveal glow-on-hover" data-stagger="4">
-                        <i class="bi bi-file-earmark-code"></i>
-                        <h4>Documentación</h4>
-                        <p>Ejemplos interactivos y soporte premium para desarrolladores.</p>
-                    </div>
-                </div>
+
 
                 <!-- CTA de la sección -->
                 <div class="api-cta reveal">
@@ -603,7 +457,7 @@
                                         </video>
                                     </div>
                                     <h3 class="back-name">Pedro Pirachican</h3>
-                                    <p class="back-tagline">Innovación Backend</p>
+                                    <p class="back-tagline">Líder Técnico</p>
                                 </div>
                             </div>
                         </div>
@@ -702,39 +556,10 @@
     <script src="js/navbar.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/carousel.js"></script>
-    <script src="js/api-terminal.js"></script>
+    <script src="js/dashboard-live.js"></script>
 
     <!-- Splash JS -->
-    <script>
-        (function () {
-            // Bloquear scroll durante el splash
-            document.body.classList.add('splash-active');
-
-            function hideSplash() {
-                var splash = document.getElementById('splash');
-                if (splash) {
-                    splash.classList.add('splash-exit');
-                    setTimeout(function () {
-                        splash.style.display = 'none';
-                    }, 500);
-                }
-                // SIEMPRE restaurar el scroll, pase lo que pase
-                document.body.classList.remove('splash-active');
-                document.body.style.overflow = '';
-            }
-
-            // Ocultar splash a los 2.6s
-            setTimeout(hideSplash, 2600);
-
-            // Fallback de seguridad: si algo falla, ocultar a los 4s
-            setTimeout(hideSplash, 4000);
-
-            // Fallback extra: si la página ya cargó, ocultar inmediatamente
-            window.addEventListener('load', function () {
-                setTimeout(hideSplash, 2600);
-            });
-        })();
-    </script>
+    <script src="js/splash.js"></script>
 
 </body>
 
