@@ -12,22 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
         bash: {
             endpoint: 'GET /api/v1/products/stock',
             code: `<pre><code><span class="code-comment">// Query stock level</span>
-curl -X GET "https://api.autostock.online/v1/stock/AST-2024" \\
+curl -X GET "https://autostock.online/api/v1/stock/AST-2024" \\
      -H "Authorization: Bearer YOUR_TOKEN"</code></pre>`
         },
         python: {
             endpoint: 'Python SDK',
-            code: `<pre><code><span class="code-comment"># Install: pip install autostock-sdk</span>
-import autostock
+            code: `<pre><code><span class="code-comment"># pip install requests</span>
+import requests
 
-client = autostock.Client('YOUR_API_KEY')
-stock = client.products.get_stock('AST-2024')
-print(f"Stock: {stock.quantity}")</code></pre>`
+url = "https://autostock.online/api/v1/stock/AST-2024"
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print(f"Error: {response.status_code}")`
         },
         js: {
             endpoint: 'Node.js / Browser',
             code: `<pre><code><span class="code-comment">// Using Fetch API</span>
-const response = await fetch('https://api.autostock.online/v1/products', {
+const response = await fetch('https://autostock.online/api/v1/products', {
   headers: { 'Authorization': 'Bearer YOUR_TOKEN' }
 });
 
