@@ -22,7 +22,7 @@
             ]
         },
         {
-            img: 'assets/img/Entradas y Novedades.jfif',
+            img: 'assets/img/Entradas y Novedades.jpeg',
             icon: 'bi bi-arrow-down-up',
             title: 'Entradas y Novedades',
             desc: 'Control de ingresos de mercancía y registro de devoluciones, faltantes y ajustes de inventario.',
@@ -35,7 +35,7 @@
             ]
         },
         {
-            img: 'assets/img/Gestión de Productos.jfif',
+            img: 'assets/img/Gestion y Productos.jpeg',
             icon: 'bi bi-boxes',
             title: 'Gestión de Productos',
             desc: 'Registro, edición y clasificación de productos por categorías y bodegas con control de stock.',
@@ -48,7 +48,7 @@
             ]
         },
         {
-            img: 'assets/img/Integración con Bsale.jfif',
+            img: 'assets/img/Integracion con Bsale.jpeg',
             icon: 'bi bi-plugin',
             title: 'Integración con Ventas',
             desc: 'Sincronización automática con el sistema de ventas para un inventario siempre actualizado.',
@@ -61,7 +61,7 @@
             ]
         },
         {
-            img: 'assets/img/Reportes e Informes.jfif',
+            img: 'assets/img/Reportes e Informes.jpeg',
             icon: 'bi bi-file-earmark-bar-graph',
             title: 'Reportes e Informes',
             desc: 'Exportación en PDF, Excel y CSV. Kardex, auditoría y análisis de performance del inventario.',
@@ -74,7 +74,7 @@
             ]
         },
         {
-            img: 'assets/img/Usuarios y Roles.jfif',
+            img: 'assets/img/Usuarios y Roles.jpeg',
             icon: 'bi bi-people',
             title: 'Usuarios y Roles',
             desc: 'Acceso diferenciado por rol con permisos granulares para cada área de la empresa.',
