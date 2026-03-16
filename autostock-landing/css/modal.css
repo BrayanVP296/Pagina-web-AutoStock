@@ -1,3 +1,6 @@
+
+
+
 /* ============================================================
    AUTOSTOCK — Modal Formulario Demo
    Estilos del modal de solicitud de demo, sección de impacto
@@ -209,13 +212,13 @@
   font-family: 'Inter', 'Roboto', sans-serif;
   font-size: 18px;
   font-weight: 800;
-  color: #111827;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
 .stat-desc {
   font-size: 14px;
-  color: #6B7280;
+  color: #ffffff;
   line-height: 1.6;
   max-width: 260px;
   margin: 0 auto;

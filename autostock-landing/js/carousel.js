@@ -50,7 +50,7 @@
         {
             img: 'assets/img/Integración con Bsale.jfif',
             icon: 'bi bi-plugin',
-            title: 'Integración con Bsale',
+            title: 'Integración con Ventas',
             desc: 'Sincronización automática con el sistema de ventas para un inventario siempre actualizado.',
             detail: 'Conecta AutoStock con tu sistema de ventas Bsale y mantén el inventario siempre sincronizado.',
             features: [
